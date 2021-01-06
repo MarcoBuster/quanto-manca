@@ -1,8 +1,9 @@
 import io
-from datetime import datetime as dt, timedelta as td
+from datetime import timedelta as td
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import requests
 
@@ -21,12 +22,13 @@ df.index = pd.to_datetime(
     format="%Y-%m-%d",
 )
 df = df.loc[df["area"] == "ITA"]
-df = df[:-1]  # Ignore the last day because it's often incomplete
+df["totale"] = pd.to_numeric(df["totale"])
+# df = df[:-1]  # Ignore the last day because it's often incomplete
 
 lastWeekData = df.loc[df.index > df.index[-1] - td(days=7)]
 vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
 remainingDays = HIT / vaccinesPerDayAverage
-hitDate = dt.now() + td(days=remainingDays)
+hitDate = df.index[-1] + td(days=remainingDays)
 
 # Generate plot
 plt.ylabel("Vaccini al giorno")
@@ -36,6 +38,10 @@ plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
 plt.gca().xaxis.set_major_locator(mdates.AutoDateLocator())
 plt.gcf().autofmt_xdate()
 plt.bar(lastWeekData.index, height=lastWeekData["totale"])
+# Trendline
+z = np.polyfit(range(0, 7), lastWeekData["totale"], 2)
+p = np.poly1d(z)
+plt.plot(lastWeekData.index, p(range(0, 7)), "r--")
 plt.savefig("plot.png", dpi=300, bbox_inches='tight')
 
 # Generate template
