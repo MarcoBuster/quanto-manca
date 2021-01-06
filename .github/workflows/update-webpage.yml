@@ -2,7 +2,7 @@ name: Update data and webpage
 
 on:
   schedule:
-    - cron: "00 01 * * *"
+    - cron: '00 01 * * *'
   workflow_dispatch:
 
 jobs:
@@ -27,4 +27,4 @@ jobs:
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with: |
-        commit_message: "Update dataset and webpage"
+        commit_message: Update dataset and webpage
