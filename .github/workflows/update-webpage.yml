@@ -26,5 +26,5 @@ jobs:
       
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
-      with: |
+      with:
         commit_message: Update dataset and webpage
