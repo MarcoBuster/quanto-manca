@@ -26,9 +26,10 @@ df["totale"] = pd.to_numeric(df["totale"])
 if dt.now() - df.index[-1] < td(days=1):
     df = df[:-1]  # Ignore the current day because it's often incomplete
 
+totalVaccines = sum(df["totale"])
 lastWeekData = df.loc[df.index > df.index[-1] - td(days=7)]
 vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
-remainingDays = HIT / vaccinesPerDayAverage
+remainingDays = (HIT - totalVaccines) / vaccinesPerDayAverage
 hitDate = df.index[-1] + td(days=remainingDays)
 
 # Generate plot
@@ -50,7 +51,7 @@ with open("template.html", "r+") as f:
     with open("index.html", "w+") as wf:
         for line in f.read().splitlines():
             if "<!-- totalVaccinations -->" in line:
-                line = f"{sum(df['totale'])}"
+                line = f"{totalVaccines}"
             elif "<!-- totalVaccinationsLastWeek -->" in line:
                 line = f"{int(vaccinesPerDayAverage*7)}"
             elif "<!-- vaccinesPerDay -->" in line:
