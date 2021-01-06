@@ -72,6 +72,63 @@
 		<p class="pt-2">
 			I dati non comprendono quelli del giorno attuale perché solitamente incompleti.
 		</p>
+		
+		<h3>Frequently Asked Questions</h3>
+		<p>
+			<b><i>Perché i dati non sono aggiornati ad oggi?</i></b> <br />
+			I dati del giorno attuale sono (per ovvi motivi) incompleti, quindi vengono ignorati.
+		</p>
+		<p>
+			<b><i>Le dosi sono due, devi raddoppiare il numero di giorni!</i></b> <br />
+			Secondo le indicazioni ufficiali, una persona per essere vaccinata con il vaccino Pfizer/Biontech
+			deve aver ricevuto due dosi. Altri vaccini (in fase di produzione o approvazione), però, non hanno questo
+			requisito. Inoltre, sembra si stia valutando di dimezzare le dosi per garantirne una seconda
+			a tutti. Insomma, il concetto stesso di <i>persona vaccinata</i> <b>è complicato</b>. <br />
+			Se in futuro verrà aggiunto un campo nel dataset che tiene precisamente traccia delle persone vaccinate,
+			il progetto userà quello. Nel mentre, ci accontentiamo di questo.
+		</p>
+		<p>
+			<b><i>Perché consideri solo i dati dell'ultima settimana?</i></b> <br />
+			Come abbiamo imparato con i dati dei contagi, 7 giorni è un periodo di tempo ragionevole per fare
+			analisi di questo tipo.
+		</p>
+		<p>
+			<b><i>I vaccini fanno X! &Egrave; tutto un complotto Y!</i></b> <br />
+			Non mi interessa della tua opinione e non mi interessa discutere con te. Mi spiace.
+		</p>
+		<p>
+			<b><i>Il progetto è open-source?</i></b> <br />
+			Sì! Oltre ad essere open-source, è anche <b>software libero</b>.
+			Puoi accedere al codice e leggere i dettagli della licenza sulla
+			<a href="https://github.com/MarcoBuster/quanto-manca">pagina GitHub dedicata</a>.
+		</p>
+		<p>
+			<b><i>Da dove prendi i dati?</i></b> <br />
+			Dal <a href="https://github.com/italia/covid19-opendata-vaccini/">dataset ufficiale</a> del
+			Dipartimento per la Trasformazione Digitale e dell'Agenzia per l'Italia Digitale, che ringrazio molto
+			per il loro contributo.
+		</p>
+		<p>
+			<b><i>Come funziona, a livello tecnico?</i></b> <br />
+			Il funzionamento è semplice. Ad ogni commit, manualmente o ogni giorno all'01:00 di notte (UTC), viene
+			attivata una GitHub Action che scarica l'ultimo dataset ed esegue lo script che aggiorna la pagina e
+			genera i grafici. Viene quindi fatto un commit sul branch <code>gh-pages</code> dove risiedono i sorgenti
+			computati della pagina, serviti da GitHub Pages.
+			Tutta l'infrastruttura è quindi completamente serverless e automaticamente gestita da GitHub. <br />
+			Lo script è scritto in Python ed utilizza le librerie di analisi numerica numpy, pandas e la libreria
+			per grafici matplotlib. Per la pagina utilizzo Bootstrap e del CSS scritto male; sicuramente questo sarà
+			oggetto di miglioramento in futuro.
+		</p>
+		<p>
+			<b><i>Aggiungi dato X?</i></b> <br />
+			Se è inerente al progetto, certo! Ultimamente ho molto poco tempo, quindi se fai una pull request su GitHub
+			lo apprezzerò.
+		</p>
+		<p>
+			<b><i>Ho trovato un errore!</i></b> oppure <b><i>Ho qualche altra domanda</i></b> <br />
+			<b>Non leggo i messaggi privati su Telegram</b>, per favore scrivimi una email all'indirizzo che trovi in basso.
+			Sarò felice di risponderti.
+		</p>
 	</div>
 	<div class="container-fluid mt-2 pb-4">
 		<hr />
@@ -80,8 +137,7 @@
 			(<a href="https://github.com/MarcoBuster">GitHub</a>,
 			<a href="https://t.me/MarcoBuster">Telegram</a>,
 			<a href="mailto:quantomanca@marco.anonaddy.com">email</a>). <br />
-			Questo è software libero. Puoi visualizzare, copiare, ridistribuire, forkare il codice sorgente
-			seguendo i termini della licenza su <a href="https://github.com/MarcoBuster/quanto-manca">GitHub</a>.
+			<span class="text-muted">Copyleft &#127279; Marco Aceti, 2020. <i>Some rights reserved.</i></span> <br />
 		</div>
 	</div>
 	
