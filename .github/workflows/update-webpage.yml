@@ -2,6 +2,8 @@ name: Update data and webpage
 
 on:
   push:
+    branches: 
+      - master
   schedule:
     - cron: '00 01 * * *'
   workflow_dispatch:
@@ -32,3 +34,5 @@ jobs:
         commit_user_name: GitHub Actions
         commit_user_email: actions@github.com
         commit_author: GitHub Actions <actions@github.com>
+        branch: gh-pages
+        file_pattern: index.html plot.png 
