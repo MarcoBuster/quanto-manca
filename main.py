@@ -1,5 +1,5 @@
 import io
-from datetime import timedelta as td
+from datetime import datetime as dt, timedelta as td
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
@@ -23,7 +23,8 @@ df.index = pd.to_datetime(
 )
 df = df.loc[df["area"] == "ITA"]
 df["totale"] = pd.to_numeric(df["totale"])
-# df = df[:-1]  # Ignore the last day because it's often incomplete
+if dt.now() - df.index[-1] < td(days=1):
+    df = df[:-1]  # Ignore the current day because it's often incomplete
 
 lastWeekData = df.loc[df.index > df.index[-1] - td(days=7)]
 vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
