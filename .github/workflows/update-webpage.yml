@@ -14,6 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -26,6 +27,13 @@ jobs:
         
     - name: Run script
       run: python main.py
+
+    - name: Evil Git branches hack
+      run: |
+        git fetch origin gh-pages
+        mv index.html plot.png ..
+        git switch gh-pages
+        mv ../index.html ../plot.png .
       
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
