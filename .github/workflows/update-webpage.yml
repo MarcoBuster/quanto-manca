@@ -1,12 +1,13 @@
 name: Update data and webpage
 
 on:
+  push:
   schedule:
     - cron: '00 01 * * *'
   workflow_dispatch:
 
 jobs:
-  build:
+  update-webpage:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +29,6 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Update dataset and webpage
+        commit_user_name: GitHub Actions
+        commit_user_email: actions@github.com
+        commit_author: GitHub Actions <actions@github.com>
