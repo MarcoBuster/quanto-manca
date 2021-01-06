@@ -1,6 +1,7 @@
 name: Update data and webpage
 
 on:
+  push:
   schedule:
     - cron: '00 01 * * *'
   workflow_dispatch:
