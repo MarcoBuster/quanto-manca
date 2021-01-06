@@ -142,4 +142,6 @@ ENV/
 config.py
 .idea/misc.xml
 *.xml
-.idea/OrarioTreniBot.iml
+
+index.html
+plot.png
