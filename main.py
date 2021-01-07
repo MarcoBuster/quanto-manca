@@ -27,7 +27,7 @@ if dt.now() - df.index[-1] < td(days=1):
     df = df[:-1]  # Ignore the current day because it's often incomplete
 
 totalVaccines = sum(df["totale"])
-lastWeekData = df.loc[df.index > df.index[-1] - td(days=7)]
+lastWeekData = df.loc[df.index > df.index[-1] - td(days=7) + td(hours=2)]
 vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
 remainingDays = (HIT - totalVaccines) / vaccinesPerDayAverage
 hitDate = df.index[-1] + td(days=remainingDays)
