@@ -62,4 +62,6 @@ with open("template.html", "r+") as f:
                 line = f"{hitDate.strftime('%H:%M:%S')}"
             elif "<!-- daysRemaining -->" in line:
                 line = f"{int(remainingDays)}"
+            elif "plot.png" in line:
+                line = f"plot.png?build={int(dt.now().timestamp())}"
             wf.write("\n" + line)
