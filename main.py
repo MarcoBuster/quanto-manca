@@ -59,6 +59,8 @@ with open("template.html", "r+") as f:
         for line in f.read().splitlines():
             if "<!-- totalVaccinations -->" in line:
                 line = f"{totalVaccines}"
+            if "<!-- totalVaccinationsPerc -->" in line:
+                line = f"{str(round(totalVaccines / ITALIAN_POPULATION * 100, 2)).replace('.', ',')}%"
             elif "<!-- totalVaccinationsLastWeek -->" in line:
                 line = f"{int(vaccinesPerDayAverage*7)}"
             elif "<!-- vaccinesPerDay -->" in line:
