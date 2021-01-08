@@ -12,6 +12,13 @@ DATA_URL = "https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/ma
 ITALIAN_POPULATION = 60_360_000
 HIT = ITALIAN_POPULATION / 100 * 80  # We need 80% of population vaccined for herd immunity
 
+
+def get_image_hash():
+    import hashlib
+    with open("plot.png", "rb") as fo:
+        return hashlib.sha256(fo.read()).hexdigest()
+
+
 r = requests.get(DATA_URL)
 df = pd.read_csv(
     io.StringIO(r.text),
@@ -63,5 +70,5 @@ with open("template.html", "r+") as f:
             elif "<!-- daysRemaining -->" in line:
                 line = f"{int(remainingDays)}"
             elif "plot.png" in line:
-                line = f"plot.png?build={int(dt.now().timestamp())}"
+                line = f"plot.png?build={get_image_hash()}"
             wf.write("\n" + line)
