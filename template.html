@@ -8,7 +8,11 @@
 	
 	<title>Quanto manca?</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-	      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link rel="stylesheet" href="jquery-jvectormap-2.0.5.css" type="text/css" media="screen" />
+	<script src="jquery.js"></script>
+	<script src="jquery-jvectormap-2.0.5.min.js"></script>
+	<script src="jquery-jvectormap-it_regions-mill.js"></script>
 	<style>
 		.text-big {
 			font-size: 130%;
@@ -27,6 +31,7 @@
 	</style>
 </head>
 <body>
+	
 	<div class="container mt-2 pt-2 px-xl-5">
 		<h1>Quando torneremo alla normalità?</h1>
 		<p>
@@ -76,7 +81,78 @@
 		<img alt="Grafico vaccini ultima settimana" src="
 		plot.png
 		" class="img-fluid">
-		
+		<br>
+		<h2 style="margin-top: 1em;">Percentuali per regione:</h2>
+		<div id="map" style="width: 80%; height: 500px; margin: auto"></div>
+		<script>
+			var gdpData = {
+				"IT-23": 
+				<!-- VDA -->,
+				"IT-21": 
+				<!-- PIE -->,
+				"IT-25": 
+				<!-- LOM -->,
+				"IT-52": 
+				<!-- TOS -->,
+				"IT-36": 
+				<!-- FVG -->,
+				"IT-42": 
+				<!-- LIG -->,
+				"IT-45": 
+				<!-- EMR -->,
+				"IT-57": 
+				<!-- MAR -->,
+				"IT-32": 
+				<!-- PAT -->,
+				"IT-55": 
+				<!-- UMB -->,
+				"IT-67": 
+				<!-- MOL -->,
+				"IT-34": 
+				<!-- VEN -->,
+				"IT-65": 
+				<!-- ABR -->,
+				"IT-62": 
+				<!-- LAZ -->,
+				"IT-75": 
+				<!-- PUG -->,
+				"IT-77": 
+				<!-- BAS -->,
+				"IT-78": 
+				<!-- CAL -->,
+				"IT-82": 
+				<!-- SIC -->,
+				"IT-72": 
+				<!-- CAM -->,
+				"IT-88": 
+				<!-- SAR -->
+			};
+			$(function () {	
+				giorni = {};
+				lung = Object.keys(gdpData).length;
+				for(i=0; i<lung; i++){
+					giorni[Object.keys(gdpData)[i]] = gdpData[Object.keys(gdpData)[i]]["tempo"]
+				}
+				$('#map').vectorMap({
+					map: 'it_regions_mill',
+					backgroundColor: "rgba(255,0,0,0)",
+					series: {
+						regions: [{
+							values: giorni,
+							scale: ['#8dcf00', '#c40000'],
+							attribute: 'fill',
+							min: jvm.min(giorni),
+							max: jvm.max(giorni)
+						}]
+				},
+					onRegionTipShow: function (e, el, code) {
+						el.html(el.html() + ' - Vaccinato il ' +  gdpData[code]["percentuale"] +'% della popolazione.<br>Di questo passo mancano ' + giorni[code] + ' giorni al raggiungimento dell\'immunità di gregge.');
+					}
+				});
+			})
+			
+		</script>
+
 		<h3 class="mt-2">Frequently Asked Questions</h3>
 		<p>
 			<b><i>Perché i dati non sono aggiornati ad oggi?</i></b> <br />
