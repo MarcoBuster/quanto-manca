@@ -56,7 +56,7 @@ plt.plot(lastWeekData.index, p(range(0, 7)), "r--")
 plt.savefig("plot.png", dpi=300, bbox_inches='tight')
 
 popolazione = [1305770, 556934, 1924701, 5785861, 4467118, 1211357, 5865544, 1543127, 10103969, 1518400, 302265, 532080, 542739 ,4341375, 4008296, 1630474, 4968410 ,3722729,880285,125501,4907704]
-#popolazione di ogni regione in ordine alfabetico, #todo trovare dati migliori, questi non mi piacciono 
+#popolazione di ogni regione in ordine alfabetico
 
 if dt.now() - dfOG.index[-1] < td(days=1):
     dfOG = dfOG[:-1]
