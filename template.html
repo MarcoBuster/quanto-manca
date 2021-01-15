@@ -15,7 +15,7 @@
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jvectormap@2.0.4/jquery-jvectormap.css">	
 	<script src="https://cdn.jsdelivr.net/npm/jvectormap@2.0.4/jquery-jvectormap.min.js"></script> 
-	<script src="https://jvectormap.com/js/jquery-jvectormap-it_regions-mill.js"></script>
+	<script src="https://jvectormap.com/js/jquery-jvectormap-it_regions-mill.js"></script>	
 	<style>
 		.text-big {
 			font-size: 130%;
@@ -31,6 +31,19 @@
             top: -6px;
             margin-bottom: -4px;
         }
+        .darkmode--activated .text-bigger {
+            color: white;
+        }
+        .darkmode--activated .text-big {
+	        color: white;
+        }
+        .darkmode--activated .text {
+	        color: #ccc8c4;
+        }
+		.darkmode--activated .img-fluid{
+			filter: invert(100%) hue-rotate(180deg);
+			-webkit-filter: invert(100%) hue-rotate(180deg);
+		}
 	</style>
 </head>
 <body>

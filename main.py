@@ -53,7 +53,7 @@ plt.bar(lastWeekData.index, height=lastWeekData["totale"])
 z = np.polyfit(range(0, 7), lastWeekData["totale"], 2)
 p = np.poly1d(z)
 plt.plot(lastWeekData.index, p(range(0, 7)), "r--")
-plt.savefig("plot.png", dpi=300, bbox_inches='tight')
+plt.savefig("plot.png", dpi=300, bbox_inches='tight', transparent=True)
 
 popolazione = [1305770, 556934, 1924701, 5785861, 4467118, 1211357, 5865544, 1543127, 10103969, 1518400, 302265, 532080, 542739 ,4341375, 4008296, 1630474, 4968410 ,3722729,880285,125501,4907704]
 #popolazione di ogni regione in ordine alfabetico
