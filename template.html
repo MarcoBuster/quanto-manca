@@ -131,25 +131,25 @@
 				<!-- SAR -->
 			};
 			$(function () {	
-				giorni = {};
+				percentuale_somm = {};
 				lung = Object.keys(gdpData).length;
 				for(i=0; i<lung; i++){
-					giorni[Object.keys(gdpData)[i]] = gdpData[Object.keys(gdpData)[i]]["tempo"]
+					percentuale_somm[Object.keys(gdpData)[i]] = gdpData[Object.keys(gdpData)[i]]["percentuale_somm"]
 				}
 				$('#map').vectorMap({
 					map: 'it_regions_mill',
 					backgroundColor: "rgba(255,0,0,0)",
 					series: {
 						regions: [{
-							values: giorni,
-							scale: ['#8dcf00', '#c40000'],
+							values: percentuale_somm,
+							scale: ['#ff0000', '#ff7926' ,'#aeff00'],
 							attribute: 'fill',
-							min: jvm.min(giorni),
-							max: jvm.max(giorni)
+							min: jvm.min(percentuale_somm),
+							max: jvm.max(percentuale_somm),
 						}]
 				},
 					onRegionTipShow: function (e, el, code) {
-						el.html(el.html() + ' - Vaccinato il ' +  gdpData[code]["percentuale"] +'% della popolazione.<br>Di questo passo mancano ' + giorni[code] + ' giorni al raggiungimento dell\'immunità di gregge.');
+						el.html(el.html() + ' - Vaccinato il ' +  gdpData[code]["percentuale_tot"] +'% della popolazione.<br>È stato somministrato il ' +  gdpData[code]["percentuale_somm"] + '% delle dosi consegate.<br>Di questo passo mancano ' + gdpData[code]["tempo"] + ' giorni al raggiungimento dell\'immunità di gregge.');
 					}
 				});
 			})

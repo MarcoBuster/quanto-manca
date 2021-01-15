@@ -65,6 +65,12 @@ regioni = dfOG["area"].loc[dfOG.index[0]]
 regioni = regioni.values.tolist()
 regioni.remove("ITA")
 
+r = requests.get("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/vaccini-summary-latest.csv") #dati per somministrazione percentuale
+dati_percentuale = pd.read_csv(
+    io.StringIO(r.text),
+    index_col="area",
+)
+
 # Generate template
 with open("template.html", "r+") as f:
     with open("index.html", "w+") as wf:
@@ -96,9 +102,12 @@ with open("template.html", "r+") as f:
                         lastWeekData = dfTemp.loc[dfTemp.index > dfTemp.index[-1] - td(days=7) + td(hours=2)]
                         vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
                         tempo = (hit_reg - vacc_tot) / vaccinesPerDayAverage
+                        
+                        percentuale_somm = dati_percentuale["percentuale_somministrazione"][regione]
 
                         obj = {
-                            "percentuale": round(vacc_tot / hit_reg * 100, 2), 
+                            "percentuale_tot": round(vacc_tot / hit_reg * 100, 2), 
+                            "percentuale_somm": percentuale_somm,
                             "tempo": int(tempo)
                         }
                         line = f'{obj},' 
