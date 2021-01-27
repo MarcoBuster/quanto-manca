@@ -29,26 +29,26 @@ df.index = pd.to_datetime(
     format="%Y-%m-%d",
 )
 df = df.loc[df["area"] == "ITA"]
-df["totale"] = pd.to_numeric(df["totale"])
+df["seconda_dose"] = pd.to_numeric(df["seconda_dose"])
 if dt.now() - df.index[-1] < td(days=1):
     df = df[:-1]  # Ignore the current day because it's often incomplete
 
-totalVaccines = sum(df["totale"])
+totalVaccines = sum(df["seconda_dose"])
 lastWeekData = df.loc[df.index > df.index[-1] - td(days=7) + td(hours=2)]
-vaccinesPerDayAverage = sum(lastWeekData["totale"]) / 7
+vaccinesPerDayAverage = sum(lastWeekData["seconda_dose"]) / 7
 remainingDays = (HIT - totalVaccines) / vaccinesPerDayAverage
 hitDate = df.index[-1] + td(days=remainingDays)
 
 # Generate plot
-plt.ylabel("Vaccini al giorno")
+plt.ylabel("Vaccinati al giorno")
 plt.xlabel("Ultima settimana")
 plt.grid(True)
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
 plt.gca().xaxis.set_major_locator(mdates.AutoDateLocator())
 plt.gcf().autofmt_xdate()
-plt.bar(lastWeekData.index, height=lastWeekData["totale"])
+plt.bar(lastWeekData.index, height=lastWeekData["seconda_dose"])
 # Trendline
-z = np.polyfit(range(0, 7), lastWeekData["totale"], 2)
+z = np.polyfit(range(0, 7), lastWeekData["seconda_dose"], 2)
 p = np.poly1d(z)
 plt.plot(lastWeekData.index, p(range(0, 7)), "r--")
 plt.savefig("plot.png", dpi=300, bbox_inches='tight')
