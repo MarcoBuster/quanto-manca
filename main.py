@@ -28,7 +28,8 @@ df.index = pd.to_datetime(
     df.index,
     format="%Y-%m-%d",
 )
-df = df.loc[df["area"] == "ITA"]
+df = df.loc[df["area"] != "ITA"]
+df=df.groupby(df.index).sum()
 df["seconda_dose"] = pd.to_numeric(df["seconda_dose"])
 if dt.now() - df.index[-1] < td(days=1):
     df = df[:-1]  # Ignore the current day because it's often incomplete
