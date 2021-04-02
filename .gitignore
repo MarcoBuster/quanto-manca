@@ -143,5 +143,5 @@ config.py
 .idea/misc.xml
 *.xml
 
-index.html
-plot.png
+/index.html
+/plot.png
