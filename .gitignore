@@ -143,6 +143,13 @@ config.py
 .idea/misc.xml
 *.xml
 
+### SASS template
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+# Custom .gitignore
 /index.html
 /plot.png
 /data.json
